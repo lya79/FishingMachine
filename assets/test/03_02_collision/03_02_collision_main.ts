@@ -3,13 +3,16 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
     bulletPool: cc.NodePool = new cc.NodePool();
-    numOfBullet: number = 30; // 子彈數量
+    numOfBullet: number = 100; // 子彈數量
 
     fishPool: cc.NodePool = new cc.NodePool();
-    numOfFish: number = 30; // 魚數量
+    numOfFish: number = 100; // 魚數量
 
     onLoad() {
-
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+        manager.enabledDebugDraw = true;
+        // manager.enabledDrawBoundingBox = true;
     }
 
     start() {
@@ -28,7 +31,7 @@ export default class NewClass extends cc.Component {
     private async initFish() {
         cc.log("loadPrefab");
 
-        const path = 'prefab/fish01';
+        const path = 'prefab/fish0302';
         const res = await this.loadRes(path, cc.Prefab);
         if (!res) {
             cc.log("error 加載失敗 path:" + path);
@@ -40,13 +43,13 @@ export default class NewClass extends cc.Component {
             this.fishPool.put(cc.instantiate(res));
         }
 
-        this.play(true, this.fishPool, '03_01_collision_fish');
+        this.play(true, this.fishPool, '03_02_collision_fish');
     }
 
     private async initBullet() {
         cc.log("loadPrefab");
 
-        const path = 'prefab/bullet01';
+        const path = 'prefab/bullet0302';
         const res = await this.loadRes(path, cc.Prefab);
         if (!res) {
             cc.log("error 加載失敗 path:" + path);
@@ -58,7 +61,7 @@ export default class NewClass extends cc.Component {
             this.bulletPool.put(cc.instantiate(res));
         }
 
-        this.play(true, this.bulletPool, 'bullet_rect_bullet_v2');
+        this.play(true, this.bulletPool, '03_02_collision_bullet');
     }
 
 
@@ -73,8 +76,6 @@ export default class NewClass extends cc.Component {
         let speed = 10; // 子彈每次移動多少像素
 
         // 每一發子彈從角度0開始遞增
-        let rotate = 0; // 初始角度
-        let diff = 1; // 遞增角度
 
         let bgWidth = this.node.width;
         let bgHeight = this.node.height;
@@ -84,7 +85,7 @@ export default class NewClass extends cc.Component {
                 break;
             }
 
-            rotate += diff;
+            let rotate = this.getRandomInt(-180, 180);;
             if (rotate > 180) {
                 rotate = -180;
             }
@@ -114,9 +115,8 @@ export default class NewClass extends cc.Component {
                         bgWidth, bgHeight
                     )
 
-                    // component.play(); // 先不位移
-
-                    component.draw();
+                    component.play(); // 先不位移
+                    // component.draw();
                 }, 5 * delay);
             }
 
