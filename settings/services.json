@@ -352,12 +352,13 @@
       "support_platform": [
         "安卓"
       ],
-      "package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcauth/0.5.2_1.4.1.300.zip",
-      "package_version_desc": "<p><strong>更新日期：</strong> 2020/10/19<br />\n<strong>更新说明：</strong><br />\n更新 SDK 1.4.1.300，新增若干接口。<br />\n",
+      "package_download_url": "https://download.cocos.com/CocosUdc/plugins/service-agcauth/0.5.3_1.4.1.300.zip",
+      "package_version_desc": "<p><strong>更新日期：</strong> 2021/08/10<br />\n<strong>更新说明：</strong><br />\n修复微信登陆失败的问题。<br />\n",
       "service_component_name": "service-agcauth",
       "package_versions": [
         "0.5.1_1.3.1",
-        "0.5.2_1.4.1.300"
+        "0.5.2_1.4.1.300",
+        "0.5.3_1.4.1.300"
       ],
       "build_platform": [
       ],
